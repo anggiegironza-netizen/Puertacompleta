@@ -1,0 +1,42 @@
+|temporizador_descendente
+clk => fin.CLK
+clk => en_marcha.CLK
+clk => contador[0].CLK
+clk => contador[1].CLK
+clk => contador[2].CLK
+clk => contador[3].CLK
+clk => contador[4].CLK
+clk => contador[5].CLK
+rst => fin.ACLR
+rst => en_marcha.ACLR
+rst => contador[0].ACLR
+rst => contador[1].ACLR
+rst => contador[2].ACLR
+rst => contador[3].ACLR
+rst => contador[4].ACLR
+rst => contador[5].ACLR
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => en_marcha.OUTPUTSELECT
+iniciar => fin.OUTPUTSELECT
+tick_1s => process_0.IN1
+preset[0] => contador.DATAB
+preset[1] => contador.DATAB
+preset[2] => contador.DATAB
+preset[3] => contador.DATAB
+preset[4] => contador.DATAB
+preset[5] => contador.DATAB
+corriendo <= en_marcha.DB_MAX_OUTPUT_PORT_TYPE
+terminado <= fin.DB_MAX_OUTPUT_PORT_TYPE
+valor_out[0] <= contador[0].DB_MAX_OUTPUT_PORT_TYPE
+valor_out[1] <= contador[1].DB_MAX_OUTPUT_PORT_TYPE
+valor_out[2] <= contador[2].DB_MAX_OUTPUT_PORT_TYPE
+valor_out[3] <= contador[3].DB_MAX_OUTPUT_PORT_TYPE
+valor_out[4] <= contador[4].DB_MAX_OUTPUT_PORT_TYPE
+valor_out[5] <= contador[5].DB_MAX_OUTPUT_PORT_TYPE
+
+

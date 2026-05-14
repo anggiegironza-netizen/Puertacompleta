@@ -1,0 +1,44 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity ROM is
+    port(
+        address  : in  std_logic_vector(5 downto 0);
+        clock    : in  std_logic;
+        data_out : out std_logic_vector(7 downto 0)
+    );
+end ROM;
+
+architecture arch_rom of ROM is
+
+    type memoria_rom is array (0 to 5) of std_logic_vector(7 downto 0);
+
+    -- Admin en direcciones 0-5:
+    -- [0] ID = 0xFF (admin especial)
+    -- [1] Horario = 0xFF (cualquier horario)
+    -- [2] Dígito 1 = 2
+    -- [3] Dígito 2 = 3
+    -- [4] Dígito 3 = 0
+    -- [5] Dígito 4 = 8
+    constant CONTENIDO : memoria_rom := (
+        0 => x"FF",
+        1 => x"FF",
+        2 => x"02",
+        3 => x"03",
+        4 => x"00",
+        5 => x"08"
+    );
+
+begin
+    process(clock)
+    begin
+        if rising_edge(clock) then
+            if to_integer(unsigned(address)) <= 5 then
+                data_out <= CONTENIDO(to_integer(unsigned(address)));
+            else
+                data_out <= x"00";
+            end if;
+        end if;
+    end process;
+end arch_rom;

@@ -1,0 +1,865 @@
+Analysis & Synthesis report for top_principal
+Tue May 12 17:42:30 2026
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |top_principal|maquina_estados_principal:U_FSM|estado_actual
+  9. State Machine - |top_principal|comparador_clave_4_digitos:U_GESTOR|estado_rd
+ 10. State Machine - |top_principal|gestor_admin:U_ADMIN|estado
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Parameter Settings for User Entity Instance: generador_tick_1s:U_TICK
+ 16. Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_OPEN
+ 17. Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_BLOQUEO
+ 18. Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_ERROR
+ 19. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1
+ 20. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 21. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_P"
+ 22. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_O"
+ 23. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_GUION"
+ 24. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_C"
+ 25. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_BLANCO"
+ 26. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_D"
+ 27. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_I"
+ 28. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_E"
+ 29. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_L"
+ 30. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_R"
+ 31. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_B"
+ 32. Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_A"
+ 33. Port Connectivity Checks: "temporizador_descendente:U_TIMER_ERROR"
+ 34. Port Connectivity Checks: "temporizador_descendente:U_TIMER_BLOQUEO"
+ 35. Port Connectivity Checks: "temporizador_descendente:U_TIMER_OPEN"
+ 36. Port Connectivity Checks: "maquina_estados_principal:U_FSM"
+ 37. Port Connectivity Checks: "comparador_clave_4_digitos:U_GESTOR"
+ 38. Port Connectivity Checks: "contador_horario_180s:U_HORARIO"
+ 39. Elapsed Time Per Partition
+ 40. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue May 12 17:42:29 2026      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; top_principal                              ;
+; Top-level Entity Name              ; top_principal                              ;
+; Family                             ; Cyclone III                                ;
+; Total logic elements               ; 1,231                                      ;
+;     Total combinational functions  ; 975                                        ;
+;     Dedicated logic registers      ; 514                                        ;
+; Total registers                    ; 514                                        ;
+; Total pins                         ; 50                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C6       ;                    ;
+; Top-level entity name                                                      ; top_principal      ; top_principal      ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ; < 0.1%      ;
+;     Processors 3-4         ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                             ;
++------------------------------------------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                                       ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                   ; Library ;
++------------------------------------------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------+---------+
+; ../ROM/ROM.vhd                                                         ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/ROM/ROM.vhd                                                         ;         ;
+; ../RAM/RAM.vhd                                                         ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/RAM/RAM.vhd                                                         ;         ;
+; ../gestor_admin/gestor_admin.vhd                                       ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/gestor_admin/gestor_admin.vhd                                       ;         ;
+; ../memoria_completa/memoria_completa.vhd                               ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/memoria_completa/memoria_completa.vhd                               ;         ;
+; ../controlador_buzzer/controlador_buzzer.vhd                           ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/controlador_buzzer/controlador_buzzer.vhd                           ;         ;
+; ../controlador_servo/controlador_servo.vhd                             ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/controlador_servo/controlador_servo.vhd                             ;         ;
+; ../decodificador_7seg_alfanumerico/decodificador_7seg_alfanumerico.vhd ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/decodificador_7seg_alfanumerico/decodificador_7seg_alfanumerico.vhd ;         ;
+; ../fiveb/fiveb.vhd                                                     ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/fiveb/fiveb.vhd                                                     ;         ;
+; ../temporizador_descendente/temporizador_descendente.vhd               ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/temporizador_descendente/temporizador_descendente.vhd               ;         ;
+; ../generador_tick_1s/generador_tick_1s.vhd                             ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/generador_tick_1s/generador_tick_1s.vhd                             ;         ;
+; ../maquina_estados_principal/maquina_estados_principal.vhd             ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/maquina_estados_principal/maquina_estados_principal.vhd             ;         ;
+; ../contador_horario_180s/contador_horario_180s.vhd                     ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/contador_horario_180s/contador_horario_180s.vhd                     ;         ;
+; ../comparador_clave_4_digitos/comparador_clave_4_digitos.vhd           ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/comparador_clave_4_digitos/comparador_clave_4_digitos.vhd           ;         ;
+; ../registro_clave_teclado/registro_clave_teclado.vhd                   ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/registro_clave_teclado/registro_clave_teclado.vhd                   ;         ;
+; ../teclado_matricial_4x4/teclado_matricial_4x4.vhd                     ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/teclado_matricial_4x4/teclado_matricial_4x4.vhd                     ;         ;
+; top_principal.vhd                                                      ; yes             ; User VHDL File               ; E:/trabajoVHDL/trabajoVHDL/top_principal/top_principal.vhd                                     ;         ;
+; lpm_divide.tdf                                                         ; yes             ; Megafunction                 ; d:/altera/13.1/quartus/libraries/megafunctions/lpm_divide.tdf                                  ;         ;
+; abs_divider.inc                                                        ; yes             ; Megafunction                 ; d:/altera/13.1/quartus/libraries/megafunctions/abs_divider.inc                                 ;         ;
+; sign_div_unsign.inc                                                    ; yes             ; Megafunction                 ; d:/altera/13.1/quartus/libraries/megafunctions/sign_div_unsign.inc                             ;         ;
+; aglobal131.inc                                                         ; yes             ; Megafunction                 ; d:/altera/13.1/quartus/libraries/megafunctions/aglobal131.inc                                  ;         ;
+; db/lpm_divide_d8m.tdf                                                  ; yes             ; Auto-Generated Megafunction  ; E:/trabajoVHDL/trabajoVHDL/top_principal/db/lpm_divide_d8m.tdf                                 ;         ;
+; db/sign_div_unsign_bkh.tdf                                             ; yes             ; Auto-Generated Megafunction  ; E:/trabajoVHDL/trabajoVHDL/top_principal/db/sign_div_unsign_bkh.tdf                            ;         ;
+; db/alt_u_div_13f.tdf                                                   ; yes             ; Auto-Generated Megafunction  ; E:/trabajoVHDL/trabajoVHDL/top_principal/db/alt_u_div_13f.tdf                                  ;         ;
+; db/add_sub_unc.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; E:/trabajoVHDL/trabajoVHDL/top_principal/db/add_sub_unc.tdf                                    ;         ;
+; db/add_sub_vnc.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; E:/trabajoVHDL/trabajoVHDL/top_principal/db/add_sub_vnc.tdf                                    ;         ;
++------------------------------------------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimated Total logic elements              ; 1,231          ;
+;                                             ;                ;
+; Total combinational functions               ; 975            ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 553            ;
+;     -- 3 input functions                    ; 106            ;
+;     -- <=2 input functions                  ; 316            ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 851            ;
+;     -- arithmetic mode                      ; 124            ;
+;                                             ;                ;
+; Total registers                             ; 514            ;
+;     -- Dedicated logic registers            ; 514            ;
+;     -- I/O registers                        ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 50             ;
+; Embedded Multiplier 9-bit elements          ; 0              ;
+; Maximum fan-out node                        ; CLOCK_50~input ;
+; Maximum fan-out                             ; 514            ;
+; Total fan-out                               ; 4907           ;
+; Average fan-out                             ; 3.09           ;
++---------------------------------------------+----------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                             ;
++-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                          ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                            ; Library Name ;
++-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
+; |top_principal                                      ; 975 (116)         ; 514 (4)      ; 0           ; 0            ; 0       ; 0         ; 50   ; 0            ; |top_principal                                                                                                 ; work         ;
+;    |comparador_clave_4_digitos:U_GESTOR|            ; 68 (68)           ; 46 (46)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|comparador_clave_4_digitos:U_GESTOR                                                             ; work         ;
+;    |contador_horario_180s:U_HORARIO|                ; 24 (24)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|contador_horario_180s:U_HORARIO                                                                 ; work         ;
+;    |controlador_buzzer:U_BUZZER|                    ; 29 (29)           ; 17 (17)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|controlador_buzzer:U_BUZZER                                                                     ; work         ;
+;    |controlador_servo:U_SERVO|                      ; 34 (34)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|controlador_servo:U_SERVO                                                                       ; work         ;
+;    |decodificador_7seg_alfanumerico:U_ADM_HEX0_COD| ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|decodificador_7seg_alfanumerico:U_ADM_HEX0_COD                                                  ; work         ;
+;    |decodificador_7seg_alfanumerico:U_ADM_HEX1|     ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|decodificador_7seg_alfanumerico:U_ADM_HEX1                                                      ; work         ;
+;    |fiveb:U_ADM_HEX0_NUM|                           ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_ADM_HEX0_NUM                                                                            ; work         ;
+;    |fiveb:U_HEX0_NUM|                               ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_HEX0_NUM                                                                                ; work         ;
+;    |fiveb:U_HEX1_NUM|                               ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_HEX1_NUM                                                                                ; work         ;
+;    |fiveb:U_HEX2_NUM|                               ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_HEX2_NUM                                                                                ; work         ;
+;    |fiveb:U_HEX3_NUM|                               ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_HEX3_NUM                                                                                ; work         ;
+;    |fiveb:U_UNIDAD|                                 ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|fiveb:U_UNIDAD                                                                                  ; work         ;
+;    |generador_tick_1s:U_TICK|                       ; 47 (47)           ; 27 (27)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|generador_tick_1s:U_TICK                                                                        ; work         ;
+;    |gestor_admin:U_ADMIN|                           ; 112 (112)         ; 55 (55)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|gestor_admin:U_ADMIN                                                                            ; work         ;
+;    |lpm_divide:Mod0|                                ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod0                                                                                 ; work         ;
+;       |lpm_divide_d8m:auto_generated|               ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod0|lpm_divide_d8m:auto_generated                                                   ; work         ;
+;          |sign_div_unsign_bkh:divider|              ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod0|lpm_divide_d8m:auto_generated|sign_div_unsign_bkh:divider                       ; work         ;
+;             |alt_u_div_13f:divider|                 ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod0|lpm_divide_d8m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_13f:divider ; work         ;
+;    |lpm_divide:Mod1|                                ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod1                                                                                 ; work         ;
+;       |lpm_divide_d8m:auto_generated|               ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod1|lpm_divide_d8m:auto_generated                                                   ; work         ;
+;          |sign_div_unsign_bkh:divider|              ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod1|lpm_divide_d8m:auto_generated|sign_div_unsign_bkh:divider                       ; work         ;
+;             |alt_u_div_13f:divider|                 ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|lpm_divide:Mod1|lpm_divide_d8m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_13f:divider ; work         ;
+;    |maquina_estados_principal:U_FSM|                ; 47 (47)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|maquina_estados_principal:U_FSM                                                                 ; work         ;
+;    |memoria_completa:U_MEMORIA|                     ; 262 (21)          ; 256 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|memoria_completa:U_MEMORIA                                                                      ; work         ;
+;       |RAM:U_RAM|                                   ; 241 (241)         ; 256 (256)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|memoria_completa:U_MEMORIA|RAM:U_RAM                                                            ; work         ;
+;    |registro_clave_teclado:U_REGISTRO|              ; 27 (27)           ; 19 (19)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|registro_clave_teclado:U_REGISTRO                                                               ; work         ;
+;    |teclado_matricial_4x4:U_TECLADO|                ; 50 (50)           ; 29 (29)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|teclado_matricial_4x4:U_TECLADO                                                                 ; work         ;
+;    |temporizador_descendente:U_TIMER_BLOQUEO|       ; 11 (11)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|temporizador_descendente:U_TIMER_BLOQUEO                                                        ; work         ;
+;    |temporizador_descendente:U_TIMER_ERROR|         ; 17 (17)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|temporizador_descendente:U_TIMER_ERROR                                                          ; work         ;
+;    |temporizador_descendente:U_TIMER_OPEN|          ; 11 (11)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_principal|temporizador_descendente:U_TIMER_OPEN                                                           ; work         ;
++-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |top_principal|maquina_estados_principal:U_FSM|estado_actual                                                                     ;
++---------------------------+-----------------------+---------------------------+---------------------+-----------------------+--------------------+
+; Name                      ; estado_actual.BLOQUEO ; estado_actual.ERROR_CLAVE ; estado_actual.ABRIR ; estado_actual.INGRESO ; estado_actual.IDLE ;
++---------------------------+-----------------------+---------------------------+---------------------+-----------------------+--------------------+
+; estado_actual.IDLE        ; 0                     ; 0                         ; 0                   ; 0                     ; 0                  ;
+; estado_actual.INGRESO     ; 0                     ; 0                         ; 0                   ; 1                     ; 1                  ;
+; estado_actual.ABRIR       ; 0                     ; 0                         ; 1                   ; 0                     ; 1                  ;
+; estado_actual.ERROR_CLAVE ; 0                     ; 1                         ; 0                   ; 0                     ; 1                  ;
+; estado_actual.BLOQUEO     ; 1                     ; 0                         ; 0                   ; 0                     ; 1                  ;
++---------------------------+-----------------------+---------------------------+---------------------+-----------------------+--------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |top_principal|comparador_clave_4_digitos:U_GESTOR|estado_rd                                                                                                                 ;
++----------------------------+-----------------+------------------+------------------+------------------+------------------+-------------------+------------------+----------------------------+
+; Name                       ; estado_rd.LISTO ; estado_rd.LEE_D3 ; estado_rd.LEE_D2 ; estado_rd.LEE_D1 ; estado_rd.LEE_D0 ; estado_rd.LEE_HOR ; estado_rd.LEE_ID ; estado_rd.ESPERA_SELECCION ;
++----------------------------+-----------------+------------------+------------------+------------------+------------------+-------------------+------------------+----------------------------+
+; estado_rd.ESPERA_SELECCION ; 0               ; 0                ; 0                ; 0                ; 0                ; 0                 ; 0                ; 0                          ;
+; estado_rd.LEE_ID           ; 0               ; 0                ; 0                ; 0                ; 0                ; 0                 ; 1                ; 1                          ;
+; estado_rd.LEE_HOR          ; 0               ; 0                ; 0                ; 0                ; 0                ; 1                 ; 0                ; 1                          ;
+; estado_rd.LEE_D0           ; 0               ; 0                ; 0                ; 0                ; 1                ; 0                 ; 0                ; 1                          ;
+; estado_rd.LEE_D1           ; 0               ; 0                ; 0                ; 1                ; 0                ; 0                 ; 0                ; 1                          ;
+; estado_rd.LEE_D2           ; 0               ; 0                ; 1                ; 0                ; 0                ; 0                 ; 0                ; 1                          ;
+; estado_rd.LEE_D3           ; 0               ; 1                ; 0                ; 0                ; 0                ; 0                 ; 0                ; 1                          ;
+; estado_rd.LISTO            ; 1               ; 0                ; 0                ; 0                ; 0                ; 0                 ; 0                ; 1                          ;
++----------------------------+-----------------+------------------+------------------+------------------+------------------+-------------------+------------------+----------------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |top_principal|gestor_admin:U_ADMIN|estado                                                                                                                                          ;
++------------------------+--------------------+------------------------+-----------------------+-----------------------+-----------------------+-----------------+--------------------+---------------+
+; Name                   ; estado.ESCRIBIENDO ; estado.OP_ELIMINAR_USR ; estado.OP_AGREGAR_HOR ; estado.OP_AGREGAR_CLV ; estado.OP_AGREGAR_USR ; estado.ADMIN_OK ; estado.CLAVE_ADMIN ; estado.ESPERA ;
++------------------------+--------------------+------------------------+-----------------------+-----------------------+-----------------------+-----------------+--------------------+---------------+
+; estado.ESPERA          ; 0                  ; 0                      ; 0                     ; 0                     ; 0                     ; 0               ; 0                  ; 0             ;
+; estado.CLAVE_ADMIN     ; 0                  ; 0                      ; 0                     ; 0                     ; 0                     ; 0               ; 1                  ; 1             ;
+; estado.ADMIN_OK        ; 0                  ; 0                      ; 0                     ; 0                     ; 0                     ; 1               ; 0                  ; 1             ;
+; estado.OP_AGREGAR_USR  ; 0                  ; 0                      ; 0                     ; 0                     ; 1                     ; 0               ; 0                  ; 1             ;
+; estado.OP_AGREGAR_CLV  ; 0                  ; 0                      ; 0                     ; 1                     ; 0                     ; 0               ; 0                  ; 1             ;
+; estado.OP_AGREGAR_HOR  ; 0                  ; 0                      ; 1                     ; 0                     ; 0                     ; 0               ; 0                  ; 1             ;
+; estado.OP_ELIMINAR_USR ; 0                  ; 1                      ; 0                     ; 0                     ; 0                     ; 0               ; 0                  ; 1             ;
+; estado.ESCRIBIENDO     ; 1                  ; 0                      ; 0                     ; 0                     ; 0                     ; 0               ; 0                  ; 1             ;
++------------------------+--------------------+------------------------+-----------------------+-----------------------+-----------------------+-----------------+--------------------+---------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                      ;
++------------------------------------------------------+------------------------------------------------------------------+
+; Register name                                        ; Reason for Removal                                               ;
++------------------------------------------------------+------------------------------------------------------------------+
+; controlador_servo:U_SERVO|pulse_width[15]            ; Stuck at VCC due to stuck port data_in                           ;
+; controlador_servo:U_SERVO|pulse_width[11..13]        ; Stuck at GND due to stuck port data_in                           ;
+; controlador_servo:U_SERVO|pulse_width[9]             ; Stuck at VCC due to stuck port data_in                           ;
+; controlador_servo:U_SERVO|pulse_width[0..3]          ; Stuck at GND due to stuck port data_in                           ;
+; gestor_admin:U_ADMIN|horario_buf[4..7]               ; Stuck at GND due to stuck port data_in                           ;
+; controlador_servo:U_SERVO|pulse_width[4..8,10,14]    ; Merged with controlador_servo:U_SERVO|pulse_width[16]            ;
+; comparador_clave_4_digitos:U_GESTOR|usuario_sel[1]   ; Merged with comparador_clave_4_digitos:U_GESTOR|base_addr_reg[4] ;
+; comparador_clave_4_digitos:U_GESTOR|usuario_sel[0]   ; Merged with comparador_clave_4_digitos:U_GESTOR|base_addr_reg[3] ;
+; comparador_clave_4_digitos:U_GESTOR|base_addr_reg[5] ; Merged with comparador_clave_4_digitos:U_GESTOR|base_addr_reg[0] ;
+; comparador_clave_4_digitos:U_GESTOR|base_addr_reg[0] ; Stuck at GND due to stuck port data_in                           ;
+; gestor_admin:U_ADMIN|addr_i[5]                       ; Stuck at GND due to stuck port data_in                           ;
+; gestor_admin:U_ADMIN|horario_buf[2,3]                ; Stuck at GND due to stuck port data_in                           ;
+; gestor_admin:U_ADMIN|dato_i[5..7]                    ; Merged with gestor_admin:U_ADMIN|dato_i[4]                       ;
+; Total Number of Removed Registers = 30               ;                                                                  ;
++------------------------------------------------------+------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 514   ;
+; Number of registers using Synchronous Clear  ; 30    ;
+; Number of registers using Synchronous Load   ; 16    ;
+; Number of registers using Asynchronous Clear ; 240   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 391   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------+
+; Inverted Register Statistics                                   ;
++------------------------------------------------------+---------+
+; Inverted Register                                    ; Fan out ;
++------------------------------------------------------+---------+
+; comparador_clave_4_digitos:U_GESTOR|horario_ram[1]   ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|horario_ram[0]   ; 2       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[7]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[6]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[5]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[4]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[3]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[2]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[1]        ; 1       ;
+; comparador_clave_4_digitos:U_GESTOR|id_ram[0]        ; 1       ;
+; teclado_matricial_4x4:U_TECLADO|key_armed            ; 2       ;
+; comparador_clave_4_digitos:U_GESTOR|base_addr_reg[1] ; 5       ;
+; comparador_clave_4_digitos:U_GESTOR|base_addr_reg[2] ; 7       ;
+; Total number of inverted registers = 13              ;         ;
++------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------+
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |top_principal|teclado_matricial_4x4:U_TECLADO|release_count[4]             ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_principal|temporizador_descendente:U_TIMER_BLOQUEO|contador[0]         ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_principal|temporizador_descendente:U_TIMER_OPEN|contador[0]            ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_principal|temporizador_descendente:U_TIMER_ERROR|contador[2]           ;
+; 4:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |top_principal|registro_clave_teclado:U_REGISTRO|contador[1]                ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 0 LEs                ; 6 LEs                  ; Yes        ; |top_principal|gestor_admin:U_ADMIN|usuario_sel[0]                          ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |top_principal|comparador_clave_4_digitos:U_GESTOR|hay_usuario              ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |top_principal|comparador_clave_4_digitos:U_GESTOR|base_addr_reg[4]         ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |top_principal|delay_sensor[0]                                              ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|ultimo_horario[3]                       ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |top_principal|comparador_clave_4_digitos:U_GESTOR|addr_rd[2]               ;
+; 11:1               ; 6 bits    ; 42 LEs        ; 12 LEs               ; 30 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|addr_i[5]                               ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 8 LEs                ; 6 LEs                  ; Yes        ; |top_principal|gestor_admin:U_ADMIN|dato_i[2]                               ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 2 LEs                ; 10 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|digito_admin[1]                         ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 10 LEs               ; 6 LEs                  ; Yes        ; |top_principal|gestor_admin:U_ADMIN|write_step[2]                           ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|clave_buf[0][0]                         ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|addr_i[4]                               ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 8 LEs                ; 6 LEs                  ; Yes        ; |top_principal|gestor_admin:U_ADMIN|dato_i[1]                               ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 4 LEs                ; 36 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|ultimo_digito[1]                        ;
+; 15:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |top_principal|gestor_admin:U_ADMIN|digito_clave[1]                         ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |top_principal|comparador_clave_4_digitos:U_GESTOR|base_addr_reg[2]         ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top_principal|comparador_clave_4_digitos:U_GESTOR|id_ram[4]                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |top_principal|gestor_admin:U_ADMIN|admin_hex0_num[0]                       ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |top_principal|unidad_temp[0]                                               ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |top_principal|HEX3                                                         ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |top_principal|HEX1                                                         ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |top_principal|gestor_admin:U_ADMIN|admin_hex1[0]                           ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |top_principal|HEX3                                                         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |top_principal|memoria_completa:U_MEMORIA|data_out[1]                       ;
+; 11:1               ; 3 bits    ; 21 LEs        ; 15 LEs               ; 6 LEs                  ; No         ; |top_principal|HEX0                                                         ;
+; 6:1                ; 8 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |top_principal|HEX2                                                         ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |top_principal|HEX1                                                         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |top_principal|gestor_admin:U_ADMIN|admin_hex0_cod[0]                       ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 10 LEs               ; 6 LEs                  ; No         ; |top_principal|HEX0                                                         ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; No         ; |top_principal|memoria_completa:U_MEMORIA|data_out[3]                       ;
+; 15:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; No         ; |top_principal|maquina_estados_principal:U_FSM|estado_siguiente.INGRESO     ;
+; 18:1               ; 2 bits    ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; No         ; |top_principal|maquina_estados_principal:U_FSM|estado_siguiente.ERROR_CLAVE ;
+; 33:1               ; 8 bits    ; 176 LEs       ; 80 LEs               ; 96 LEs                 ; No         ; |top_principal|gestor_admin:U_ADMIN|estado                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: generador_tick_1s:U_TICK ;
++----------------+----------+-------------------------------------------+
+; Parameter Name ; Value    ; Type                                      ;
++----------------+----------+-------------------------------------------+
+; clk_freq       ; 50000000 ; Signed Integer                            ;
++----------------+----------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_OPEN ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; max_value      ; 59    ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_BLOQUEO ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; max_value      ; 59    ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: temporizador_descendente:U_TIMER_ERROR ;
++----------------+-------+------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                       ;
++----------------+-------+------------------------------------------------------------+
+; max_value      ; 59    ; Signed Integer                                             ;
++----------------+-------+------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                ;
+; LPM_WIDTHD             ; 6              ; Untyped                ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_d8m ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                ;
+; LPM_WIDTHD             ; 6              ; Untyped                ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_d8m ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_P" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[1..0] ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[3]    ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[2]    ; Input ; Info     ; Stuck at GND                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_O" ;
++-----------+-------+----------+----------------------------------------+
+; Port      ; Type  ; Severity ; Details                                ;
++-----------+-------+----------+----------------------------------------+
+; codigo[3] ; Input ; Info     ; Stuck at VCC                           ;
+; codigo[2] ; Input ; Info     ; Stuck at GND                           ;
+; codigo[1] ; Input ; Info     ; Stuck at VCC                           ;
+; codigo[0] ; Input ; Info     ; Stuck at GND                           ;
++-----------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_GUION"                                                    ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; codigo[2..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; codigo[3]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; codigo[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; seg          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_C" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[2..0] ; Input ; Info     ; Stuck at GND                        ;
+; codigo[3]    ; Input ; Info     ; Stuck at VCC                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_BLANCO" ;
++--------+-------+----------+------------------------------------------+
+; Port   ; Type  ; Severity ; Details                                  ;
++--------+-------+----------+------------------------------------------+
+; codigo ; Input ; Info     ; Stuck at GND                             ;
++--------+-------+----------+------------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_D" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[2..0] ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[3]    ; Input ; Info     ; Stuck at GND                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_I" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[2..1] ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[3]    ; Input ; Info     ; Stuck at GND                        ;
+; codigo[0]    ; Input ; Info     ; Stuck at GND                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_E" ;
++-----------+-------+----------+----------------------------------------+
+; Port      ; Type  ; Severity ; Details                                ;
++-----------+-------+----------+----------------------------------------+
+; codigo[3] ; Input ; Info     ; Stuck at GND                           ;
+; codigo[2] ; Input ; Info     ; Stuck at VCC                           ;
+; codigo[1] ; Input ; Info     ; Stuck at GND                           ;
+; codigo[0] ; Input ; Info     ; Stuck at VCC                           ;
++-----------+-------+----------+----------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_L" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[1..0] ; Input ; Info     ; Stuck at GND                        ;
+; codigo[3]    ; Input ; Info     ; Stuck at GND                        ;
+; codigo[2]    ; Input ; Info     ; Stuck at VCC                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_R" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[1..0] ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[3..2] ; Input ; Info     ; Stuck at GND                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_B" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[3..2] ; Input ; Info     ; Stuck at GND                        ;
+; codigo[1]    ; Input ; Info     ; Stuck at VCC                        ;
+; codigo[0]    ; Input ; Info     ; Stuck at GND                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "decodificador_7seg_alfanumerico:U_LETRA_A" ;
++--------------+-------+----------+-------------------------------------+
+; Port         ; Type  ; Severity ; Details                             ;
++--------------+-------+----------+-------------------------------------+
+; codigo[3..1] ; Input ; Info     ; Stuck at GND                        ;
+; codigo[0]    ; Input ; Info     ; Stuck at VCC                        ;
++--------------+-------+----------+-------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "temporizador_descendente:U_TIMER_ERROR"                                                     ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; preset[5..2] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; preset[1]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; preset[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; corriendo    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; valor_out    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "temporizador_descendente:U_TIMER_BLOQUEO"                                                   ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; preset[5..4] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; preset[3]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; preset[2]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; preset[1]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; preset[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; corriendo    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "temporizador_descendente:U_TIMER_OPEN"                                                      ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; preset[5..3] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; preset[2]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; preset[1]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; preset[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; corriendo    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "maquina_estados_principal:U_FSM"                                                                ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; limpiar_intentos ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; intentos_out     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "comparador_clave_4_digitos:U_GESTOR"                                                            ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; acceso_permitido ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "contador_horario_180s:U_HORARIO"                                                        ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; segundos ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+    Info: Processing started: Tue May 12 17:42:20 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top_principal -c top_principal
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/rom/rom.vhd
+    Info (12022): Found design unit 1: ROM-arch_rom
+    Info (12023): Found entity 1: ROM
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/ram/ram.vhd
+    Info (12022): Found design unit 1: RAM-arch_ram
+    Info (12023): Found entity 1: RAM
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/gestor_admin/gestor_admin.vhd
+    Info (12022): Found design unit 1: gestor_admin-rtl
+    Info (12023): Found entity 1: gestor_admin
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/memoria_completa/memoria_completa.vhd
+    Info (12022): Found design unit 1: memoria_completa-arch_memoria_completa
+    Info (12023): Found entity 1: memoria_completa
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/controlador_buzzer/controlador_buzzer.vhd
+    Info (12022): Found design unit 1: controlador_buzzer-arch_controlador_buzzer
+    Info (12023): Found entity 1: controlador_buzzer
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/controlador_servo/controlador_servo.vhd
+    Info (12022): Found design unit 1: controlador_servo-arch_controlador_servo
+    Info (12023): Found entity 1: controlador_servo
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/decodificador_7seg_alfanumerico/decodificador_7seg_alfanumerico.vhd
+    Info (12022): Found design unit 1: decodificador_7seg_alfanumerico-arquitectura_decodificador_7seg_alfanumerico
+    Info (12023): Found entity 1: decodificador_7seg_alfanumerico
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/fiveb/fiveb.vhd
+    Info (12022): Found design unit 1: fiveb-arch_fiveb
+    Info (12023): Found entity 1: fiveb
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/temporizador_descendente/temporizador_descendente.vhd
+    Info (12022): Found design unit 1: temporizador_descendente-arquitectura_temporizador_descendente
+    Info (12023): Found entity 1: temporizador_descendente
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/generador_tick_1s/generador_tick_1s.vhd
+    Info (12022): Found design unit 1: generador_tick_1s-arquitectura_generador_tick_1s
+    Info (12023): Found entity 1: generador_tick_1s
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/maquina_estados_principal/maquina_estados_principal.vhd
+    Info (12022): Found design unit 1: maquina_estados_principal-rtl
+    Info (12023): Found entity 1: maquina_estados_principal
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/contador_horario_180s/contador_horario_180s.vhd
+    Info (12022): Found design unit 1: contador_horario_180s-rtl
+    Info (12023): Found entity 1: contador_horario_180s
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/comparador_clave_4_digitos/comparador_clave_4_digitos.vhd
+    Info (12022): Found design unit 1: comparador_clave_4_digitos-arch_comparador_clave_4_digitos
+    Info (12023): Found entity 1: comparador_clave_4_digitos
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/registro_clave_teclado/registro_clave_teclado.vhd
+    Info (12022): Found design unit 1: registro_clave_teclado-rtl
+    Info (12023): Found entity 1: registro_clave_teclado
+Info (12021): Found 2 design units, including 1 entities, in source file /trabajovhdl/trabajovhdl/teclado_matricial_4x4/teclado_matricial_4x4.vhd
+    Info (12022): Found design unit 1: teclado_matricial_4x4-arch_teclado_matricial_4x4
+    Info (12023): Found entity 1: teclado_matricial_4x4
+Info (12021): Found 2 design units, including 1 entities, in source file top_principal.vhd
+    Info (12022): Found design unit 1: top_principal-arch_top_principal
+    Info (12023): Found entity 1: top_principal
+Info (12127): Elaborating entity "top_principal" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(42): object "segundos_horario" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(48): object "acceso_ok_s" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(71): object "error_valor" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(72): object "dummy_apertura" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(73): object "dummy_bloqueo" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(74): object "dummy_error" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(77): object "limpiar_intentos_s" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(78): object "intentos_s" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top_principal.vhd(88): object "seg_guion" assigned a value but never read
+Info (12128): Elaborating entity "teclado_matricial_4x4" for hierarchy "teclado_matricial_4x4:U_TECLADO"
+Info (12128): Elaborating entity "generador_tick_1s" for hierarchy "generador_tick_1s:U_TICK"
+Info (12128): Elaborating entity "contador_horario_180s" for hierarchy "contador_horario_180s:U_HORARIO"
+Info (12128): Elaborating entity "registro_clave_teclado" for hierarchy "registro_clave_teclado:U_REGISTRO"
+Info (12128): Elaborating entity "memoria_completa" for hierarchy "memoria_completa:U_MEMORIA"
+Info (12128): Elaborating entity "ROM" for hierarchy "memoria_completa:U_MEMORIA|ROM:U_ROM"
+Info (12128): Elaborating entity "RAM" for hierarchy "memoria_completa:U_MEMORIA|RAM:U_RAM"
+Info (12128): Elaborating entity "gestor_admin" for hierarchy "gestor_admin:U_ADMIN"
+Info (12128): Elaborating entity "comparador_clave_4_digitos" for hierarchy "comparador_clave_4_digitos:U_GESTOR"
+Info (12128): Elaborating entity "maquina_estados_principal" for hierarchy "maquina_estados_principal:U_FSM"
+Info (12128): Elaborating entity "temporizador_descendente" for hierarchy "temporizador_descendente:U_TIMER_OPEN"
+Info (12128): Elaborating entity "controlador_servo" for hierarchy "controlador_servo:U_SERVO"
+Info (12128): Elaborating entity "controlador_buzzer" for hierarchy "controlador_buzzer:U_BUZZER"
+Info (12128): Elaborating entity "fiveb" for hierarchy "fiveb:U_HEX0_NUM"
+Info (12128): Elaborating entity "decodificador_7seg_alfanumerico" for hierarchy "decodificador_7seg_alfanumerico:U_LETRA_A"
+Info (276014): Found 1 instances of uninferred RAM logic
+    Info (276007): RAM logic "memoria_completa:U_MEMORIA|RAM:U_RAM|mem" is uninferred due to asynchronous read logic
+Warning (113028): 8 out of 32 addresses are uninitialized. The Quartus II software will initialize them to "0". There are 2 warnings found, and 2 warnings are reported.
+    Warning (113027): Addresses ranging from 0 to 5 are not initialized
+    Warning (113027): Addresses ranging from 30 to 31 are not initialized
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod1"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0"
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod1"
+Info (12133): Instantiated megafunction "lpm_divide:Mod1" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "6"
+    Info (12134): Parameter "LPM_WIDTHD" = "6"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_d8m.tdf
+    Info (12023): Found entity 1: lpm_divide_d8m
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_bkh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_bkh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_13f.tdf
+    Info (12023): Found entity 1: alt_u_div_13f
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_unc.tdf
+    Info (12023): Found entity 1: add_sub_unc
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_vnc.tdf
+    Info (12023): Found entity 1: add_sub_vnc
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1304 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 9 input pins
+    Info (21059): Implemented 41 output pins
+    Info (21061): Implemented 1254 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 4687 megabytes
+    Info: Processing ended: Tue May 12 17:42:30 2026
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:02
+
+

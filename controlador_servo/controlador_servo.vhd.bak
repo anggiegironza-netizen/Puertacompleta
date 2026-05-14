@@ -1,0 +1,53 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity controlador_servo is
+    -- Servo estándar: período 20ms, pulso 1ms=cerrado, 2ms=abierto
+    -- Con CLK_FREQ=50MHz: período = 1_000_000 ciclos
+    --   1ms = 50_000 ciclos  → cerrado
+    --   2ms = 100_000 ciclos → abierto (90°)
+    generic(
+        CLK_FREQ       : integer := 50_000_000;
+        PERIOD_CICLOS  : integer := 1_000_000;  -- 20ms
+        PULSO_CERRADO  : integer := 50_000;     -- 1ms
+        PULSO_ABIERTO  : integer := 100_000     -- 2ms
+    );
+    port(
+        clk         : in  std_logic; -- Reloj principal
+        rst         : in  std_logic; -- Reset del sistema
+        abrir       : in  std_logic; -- 1 = abrir puerta, 0 = cerrar
+        servo_pwm   : out std_logic  -- Señal PWM hacia el servo
+    );
+end controlador_servo;
+
+architecture arquitectura_controlador_servo of controlador_servo is
+    signal contador     : integer range 0 to 1_000_000 := 0;
+    signal pulso_activo : integer range 0 to 100_000   := 0;
+begin
+
+    -- Selecciona el ancho de pulso según la orden
+    pulso_activo <= PULSO_ABIERTO when abrir = '1' else PULSO_CERRADO;
+
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            contador  <= 0;
+            servo_pwm <= '0';
+        elsif rising_edge(clk) then
+            if contador < PERIOD_CICLOS - 1 then
+                contador <= contador + 1;
+            else
+                contador <= 0;
+            end if;
+
+            -- PWM: alto durante el ancho de pulso, bajo el resto del período
+            if contador < pulso_activo then
+                servo_pwm <= '1';
+            else
+                servo_pwm <= '0';
+            end if;
+        end if;
+    end process;
+
+end arquitectura_controlador_servo;

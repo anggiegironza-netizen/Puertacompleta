@@ -1,0 +1,30 @@
+
+State Machine - |top_principal|maquina_estados_principal:U_FSM|estado_actual
+Name estado_actual.BLOQUEO estado_actual.ERROR_CLAVE estado_actual.ABRIR estado_actual.INGRESO estado_actual.IDLE 
+estado_actual.IDLE 0 0 0 0 0 
+estado_actual.INGRESO 0 0 0 1 1 
+estado_actual.ABRIR 0 0 1 0 1 
+estado_actual.ERROR_CLAVE 0 1 0 0 1 
+estado_actual.BLOQUEO 1 0 0 0 1 
+
+State Machine - |top_principal|comparador_clave_4_digitos:U_GESTOR|estado_rd
+Name estado_rd.LISTO estado_rd.LEE_D3 estado_rd.LEE_D2 estado_rd.LEE_D1 estado_rd.LEE_D0 estado_rd.LEE_HOR estado_rd.LEE_ID estado_rd.ESPERA_SELECCION 
+estado_rd.ESPERA_SELECCION 0 0 0 0 0 0 0 0 
+estado_rd.LEE_ID 0 0 0 0 0 0 1 1 
+estado_rd.LEE_HOR 0 0 0 0 0 1 0 1 
+estado_rd.LEE_D0 0 0 0 0 1 0 0 1 
+estado_rd.LEE_D1 0 0 0 1 0 0 0 1 
+estado_rd.LEE_D2 0 0 1 0 0 0 0 1 
+estado_rd.LEE_D3 0 1 0 0 0 0 0 1 
+estado_rd.LISTO 1 0 0 0 0 0 0 1 
+
+State Machine - |top_principal|gestor_admin:U_ADMIN|estado
+Name estado.ESCRIBIENDO estado.OP_ELIMINAR_USR estado.OP_AGREGAR_HOR estado.OP_AGREGAR_CLV estado.OP_AGREGAR_USR estado.ADMIN_OK estado.CLAVE_ADMIN estado.ESPERA 
+estado.ESPERA 0 0 0 0 0 0 0 0 
+estado.CLAVE_ADMIN 0 0 0 0 0 0 1 1 
+estado.ADMIN_OK 0 0 0 0 0 1 0 1 
+estado.OP_AGREGAR_USR 0 0 0 0 1 0 0 1 
+estado.OP_AGREGAR_CLV 0 0 0 1 0 0 0 1 
+estado.OP_AGREGAR_HOR 0 0 1 0 0 0 0 1 
+estado.OP_ELIMINAR_USR 0 1 0 0 0 0 0 1 
+estado.ESCRIBIENDO 1 0 0 0 0 0 0 1 

@@ -1,0 +1,185 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity teclado_matricial_4x4 is
+    port(
+        clk        : in  std_logic;                    -- Reloj principal 50MHz
+        rst        : in  std_logic;                    -- Reset del sistema
+        fila       : in  std_logic_vector(3 downto 0); -- Filas del teclado (entrada)
+        columna    : out std_logic_vector(3 downto 0); -- Columnas del teclado (salida)
+        dato_out   : out std_logic_vector(3 downto 0); -- Dígito detectado (0..9, A..F)
+        dato_valid : out std_logic                     -- Pulso 1 ciclo al detectar tecla
+    );
+end teclado_matricial_4x4;
+
+architecture arquitectura_teclado_matricial_4x4 of teclado_matricial_4x4 is
+
+    -- Divisor de reloj para escaneo lento (~1kHz)
+    constant DIV_MAX     : integer := 50000;
+    signal   div_cnt     : integer range 0 to DIV_MAX := 0;
+    signal   scan_tick   : std_logic := '0';
+
+    -- Columna activa que se está escaneando (0..3)
+    signal col_idx       : integer range 0 to 3 := 0;
+
+    -- Registro de filas estabilizado (2 etapas de sincronización)
+    signal fila_sync0    : std_logic_vector(3 downto 0) := "1111";
+    signal fila_sync1    : std_logic_vector(3 downto 0) := "1111";
+
+    -- Antirrebote: cuenta ciclos de scan_tick estables
+    constant DEBOUNCE_MAX : integer := 8;
+    signal   db_cnt      : integer range 0 to DEBOUNCE_MAX := 0;
+    signal   fila_stable : std_logic_vector(3 downto 0) := "1111";
+    signal   fila_prev   : std_logic_vector(3 downto 0) := "1111";
+
+    -- Última tecla enviada para evitar repetición
+    signal last_col      : integer range 0 to 3 := 0;
+    signal last_row      : std_logic_vector(3 downto 0) := "1111";
+    signal key_held      : std_logic := '0'; -- 1 mientras la tecla sigue presionada
+
+    -- Función: traduce (columna, fila) a código de 4 bits
+    -- Teclado estándar 4x4:
+    --   Col0: 1 4 7 *     Col1: 2 5 8 0
+    --   Col2: 3 6 9 #     Col3: A B C D
+    function decodificar(c : integer; f : std_logic_vector(3 downto 0))
+        return std_logic_vector is
+    begin
+        case c is
+            when 0 =>
+                case f is
+                    when "1110" => return x"1"; -- 1
+                    when "1101" => return x"4"; -- 4
+                    when "1011" => return x"7"; -- 7
+                    when "0111" => return x"E"; -- * → E
+                    when others => return x"F"; -- inválido
+                end case;
+            when 1 =>
+                case f is
+                    when "1110" => return x"2"; -- 2
+                    when "1101" => return x"5"; -- 5
+                    when "1011" => return x"8"; -- 8
+                    when "0111" => return x"0"; -- 0
+                    when others => return x"F";
+                end case;
+            when 2 =>
+                case f is
+                    when "1110" => return x"3"; -- 3
+                    when "1101" => return x"6"; -- 6
+                    when "1011" => return x"9"; -- 9
+                    when "0111" => return x"F"; -- # → F (confirmar)
+                    when others => return x"F";
+                end case;
+            when 3 =>
+                case f is
+                    when "1110" => return x"A"; -- A
+                    when "1101" => return x"B"; -- B
+                    when "1011" => return x"C"; -- C
+                    when "0111" => return x"D"; -- D
+                    when others => return x"F";
+                end case;
+            when others => return x"F";
+        end case;
+    end function;
+
+begin
+
+    -- ── Generador de tick de escaneo ────────────────────────────────────────
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            div_cnt   <= 0;
+            scan_tick <= '0';
+        elsif rising_edge(clk) then
+            scan_tick <= '0';
+            if div_cnt = DIV_MAX - 1 then
+                div_cnt   <= 0;
+                scan_tick <= '1';
+            else
+                div_cnt <= div_cnt + 1;
+            end if;
+        end if;
+    end process;
+
+    -- ── Escaneo de columnas + sincronización de filas ────────────────────────
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            col_idx    <= 0;
+            fila_sync0 <= "1111";
+            fila_sync1 <= "1111";
+        elsif rising_edge(clk) then
+            -- Sincronización de 2 etapas (metaestabilidad)
+            fila_sync0 <= fila;
+            fila_sync1 <= fila_sync0;
+
+            -- Avanza columna en cada tick de escaneo
+            if scan_tick = '1' then
+                if col_idx = 3 then
+                    col_idx <= 0;
+                else
+                    col_idx <= col_idx + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- Columna activa: one-hot activo bajo
+    with col_idx select
+        columna <= "1110" when 0,
+                   "1101" when 1,
+                   "1011" when 2,
+                   "0111" when 3,
+                   "1111" when others;
+
+    -- ── Antirrebote y detección de tecla ────────────────────────────────────
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            db_cnt     <= 0;
+            fila_stable <= "1111";
+            fila_prev   <= "1111";
+            last_col   <= 0;
+            last_row   <= "1111";
+            key_held   <= '0';
+            dato_out   <= (others => '0');
+            dato_valid <= '0';
+        elsif rising_edge(clk) then
+            dato_valid <= '0'; -- por defecto no hay dato nuevo
+
+            if scan_tick = '1' then
+                if fila_sync1 = fila_prev then
+                    -- Señal estable: incrementa contador de debounce
+                    if db_cnt < DEBOUNCE_MAX then
+                        db_cnt <= db_cnt + 1;
+                    end if;
+                else
+                    -- Cambio detectado: reinicia debounce
+                    db_cnt   <= 0;
+                    fila_prev <= fila_sync1;
+                end if;
+
+                -- Solo actúa si el valor es estable suficiente tiempo
+                if db_cnt = DEBOUNCE_MAX then
+                    fila_stable <= fila_sync1;
+
+                    if fila_sync1 /= "1111" then
+                        -- Hay tecla presionada
+                        if key_held = '0' then
+                            -- Primera vez que se detecta esta tecla
+                            dato_out   <= decodificar(col_idx, fila_sync1);
+                            dato_valid <= '1';
+                            last_col   <= col_idx;
+                            last_row   <= fila_sync1;
+                            key_held   <= '1';
+                        end if;
+                    else
+                        -- No hay tecla: limpia estado
+                        key_held <= '0';
+                    end if;
+                end if;
+            end if;
+        end if;
+    end process;
+
+end arquitectura_teclado_matricial_4x4;

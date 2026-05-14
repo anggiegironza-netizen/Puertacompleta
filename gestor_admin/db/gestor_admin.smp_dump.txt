@@ -1,0 +1,11 @@
+
+State Machine - |gestor_admin|estado
+Name estado.ESCRIBIENDO estado.OP_ELIMINAR_USR estado.OP_AGREGAR_HOR estado.OP_AGREGAR_CLV estado.OP_AGREGAR_USR estado.ADMIN_OK estado.CLAVE_ADMIN estado.ESPERA 
+estado.ESPERA 0 0 0 0 0 0 0 0 
+estado.CLAVE_ADMIN 0 0 0 0 0 0 1 1 
+estado.ADMIN_OK 0 0 0 0 0 1 0 1 
+estado.OP_AGREGAR_USR 0 0 0 0 1 0 0 1 
+estado.OP_AGREGAR_CLV 0 0 0 1 0 0 0 1 
+estado.OP_AGREGAR_HOR 0 0 1 0 0 0 0 1 
+estado.OP_ELIMINAR_USR 0 1 0 0 0 0 0 1 
+estado.ESCRIBIENDO 1 0 0 0 0 0 0 1 

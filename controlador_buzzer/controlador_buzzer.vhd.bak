@@ -1,0 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity controlador_buzzer is
+    -- Genera tono de ~1kHz mientras alarma esté activa
+    -- Con CLK_FREQ=50MHz: medio período = 25_000 ciclos
+    generic(
+        CLK_FREQ     : integer := 50_000_000;
+        TONO_MITAD   : integer := 25_000  -- Mitad del período de 1kHz
+    );
+    port(
+        clk          : in  std_logic; -- Reloj principal
+        rst          : in  std_logic; -- Reset del sistema
+        activar      : in  std_logic; -- 1 = alarma activa
+        buzzer_out   : out std_logic  -- Señal al buzzer
+    );
+end controlador_buzzer;
+
+architecture arquitectura_controlador_buzzer of controlador_buzzer is
+    signal contador : integer range 0 to 25_000 := 0;
+    signal tono     : std_logic := '0';
+begin
+
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            contador <= 0;
+            tono     <= '0';
+        elsif rising_edge(clk) then
+            if activar = '1' then
+                -- Oscila a 1kHz
+                if contador = TONO_MITAD - 1 then
+                    contador <= 0;
+                    tono     <= not tono; -- Invierte la señal cada medio período
+                else
+                    contador <= contador + 1;
+                end if;
+            else
+                -- Alarma inactiva: mantiene salida baja
+                contador <= 0;
+                tono     <= '0';
+            end if;
+        end if;
+    end process;
+
+    buzzer_out <= tono;
+
+end arquitectura_controlador_buzzer;

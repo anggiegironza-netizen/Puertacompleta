@@ -1,0 +1,45 @@
+|contador_horario_180s
+clk => vuelta_cero~reg0.CLK
+clk => contador[0].CLK
+clk => contador[1].CLK
+clk => contador[2].CLK
+clk => contador[3].CLK
+clk => contador[4].CLK
+clk => contador[5].CLK
+clk => contador[6].CLK
+clk => contador[7].CLK
+rst => vuelta_cero~reg0.ACLR
+rst => contador[0].ACLR
+rst => contador[1].ACLR
+rst => contador[2].ACLR
+rst => contador[3].ACLR
+rst => contador[4].ACLR
+rst => contador[5].ACLR
+rst => contador[6].ACLR
+rst => contador[7].ACLR
+tick_1s => vuelta_cero.OUTPUTSELECT
+tick_1s => contador[7].ENA
+tick_1s => contador[6].ENA
+tick_1s => contador[5].ENA
+tick_1s => contador[4].ENA
+tick_1s => contador[3].ENA
+tick_1s => contador[2].ENA
+tick_1s => contador[1].ENA
+tick_1s => contador[0].ENA
+segundos[0] <= contador[0].DB_MAX_OUTPUT_PORT_TYPE
+segundos[1] <= contador[1].DB_MAX_OUTPUT_PORT_TYPE
+segundos[2] <= contador[2].DB_MAX_OUTPUT_PORT_TYPE
+segundos[3] <= contador[3].DB_MAX_OUTPUT_PORT_TYPE
+segundos[4] <= contador[4].DB_MAX_OUTPUT_PORT_TYPE
+segundos[5] <= contador[5].DB_MAX_OUTPUT_PORT_TYPE
+segundos[6] <= contador[6].DB_MAX_OUTPUT_PORT_TYPE
+segundos[7] <= contador[7].DB_MAX_OUTPUT_PORT_TYPE
+horario[0] <= horario_i.DB_MAX_OUTPUT_PORT_TYPE
+horario[1] <= horario_i.DB_MAX_OUTPUT_PORT_TYPE
+vuelta_cero <= vuelta_cero~reg0.DB_MAX_OUTPUT_PORT_TYPE
+led_manana <= Equal1.DB_MAX_OUTPUT_PORT_TYPE
+led_tarde <= Equal2.DB_MAX_OUTPUT_PORT_TYPE
+led_noche <= Equal3.DB_MAX_OUTPUT_PORT_TYPE
+led_fin <= Equal4.DB_MAX_OUTPUT_PORT_TYPE
+
+
